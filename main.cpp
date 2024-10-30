@@ -1,28 +1,37 @@
 #include<bits/stdc++.h>
-#include "./Utilities/write_file.h"
+#include "./Utilities/registerUser.h"
+#include "./Utilities/loginUser.cpp"
 #include "./models/Transcation.h"
+#include "./Utilities/fetchUser.h"
 using namespace std;
 
 
 
 int main(){
-    User* newUser=new User("Hello","10/12/2005","10934011","dfjhaoij");
-    User* newUser2=new User("World","12/10/2000","34214209348","djkafkdjfoiw");
-    writeInFile(newUser);
-    writeInFile(newUser2);
-    newUser->depositMoney(10000);
+    // registerUser();
+    // registerUser();
 
-    newUser->transcation_history=new Transcation();
-    newUser2->transcation_history=new Transcation();
 
-    do_Transcation(1000,newUser,newUser2);
-    do_Transcation(500,newUser2,newUser);
+    // User* user1=loginUser();
+    // cout<<user1->phone_Number<<endl;
 
-    cout<<"New User 2 Transcation"<<endl;
-    newUser2->transcation_history->displayTranscation();
-    cout<<"New user Transcation"<<endl;
-    newUser->transcation_history->displayTranscation();
+    // string accountNumber;
+    // cin>>accountNumber;
+    // User* user1=getUser(accountNumber);
+    // string otherAccountNumber;
+    // cin>>otherAccountNumber;
+    // User* user2=getUser(otherAccountNumber);
+    // user1->depositMoney(10000);
+    // do_Transcation(3000,user1,user2);
+    // do_Transcation(1000,user2,user1);
+
+
+    // cout<<"User 1 Transcation History: "<<endl;
+    // user1->transcation_history->displayTranscation();
+    // cout<<endl<<endl;
+
+    // cout<<"User 2 Transcation History: "<<endl;
+    // user2->transcation_history->displayTranscation();
     
 }
-
 
