@@ -4,7 +4,28 @@
 #include<bits/stdc++.h>
 #include "../Utilities/ageCalculator.cpp"
 #include "../Utilities/read_files.h"
+#include <conio.h>
 using namespace std;
+
+string getHiddenInput() {
+    string input;
+    char ch;
+
+    while ((ch = _getch()) != '\r') { // Read until Enter key is pressed
+        if (ch == '\b') { // Handle backspace
+            if (!input.empty()) {
+                input.pop_back();
+                cout << "\b \b"; // Move cursor back, overwrite with space, and move back again
+            }
+        } else {
+            input += ch;
+            cout << '*'; // Display asterisks for each character
+        }
+    }
+
+    cout << endl; // Move to the next line after input
+    return input;
+}
 
 
 class Transcation;
@@ -20,9 +41,7 @@ class User{
     int account_balance=0; 
     tm* createdTime;
     Transcation* transcation_history=NULL;
-    
-    private:
-        string password="";
+    string password="";
 
     public:
     User(string name,string dob,string phone_Number,string Address){
@@ -39,8 +58,6 @@ class User{
         tm* local_time = localtime(&now_c);
         this->createdTime=local_time;
         this->age=ageCalculator(dob);
-        this->generateAccountNumber();
-        this->setPassword();
 
 
     }
@@ -63,10 +80,10 @@ class User{
     void setPassword(){
         cout<<"Enter the 6 digit password: ";
         string pasword;
-        cin>>password;
+        password=getHiddenInput();
         while(password.length()!=6){
             cout<<"Please enter the password of 6 digit."<<endl;
-            cin>>password;
+            password=getHiddenInput();
         }
         cout<<"Are you sure you want to add this password?"<<endl;
         cout<<"Enter Y for yes and N for no."<<endl;
