@@ -5,6 +5,7 @@
 #include <regex>
 #include <chrono>
 #include <ctime> 
+// #include "../Utilities/fetchUser.cpp"
 #include "../Utilities/write_file.h"
 using namespace std;
 
@@ -21,29 +22,19 @@ class Transcation_Node{
     Transcation_Node* previousNode=NULL;
     Transcation_Node* nextNode=NULL;
     public:
+    // Transcation_Node(int money, string from_user_account, string to_user_account){
+    //     User* from_user=getUserDetails(from_user_account);
+    //     User* to_user=getUserDetails(to_user_account);
+    //     // Adding Information
+    //     this->money=money;
+    //     this->fromUser=from_user;
+    //     this->ToUser=to_user;
+    // }
     Transcation_Node(int money, User* from_user, User* to_user){
-        if(from_user->account_balance<money){
-            cout<<"Transcation can not happen Please deposit money into your account.";
-            return ;
-        }
         // Adding Information
         this->money=money;
-        from_user->account_balance = from_user->account_balance - money;
-        to_user->account_balance = to_user->account_balance + money;
         this->fromUser=from_user;
         this->ToUser=to_user;
-        
-        // Adding Time
-        auto now = chrono::system_clock::now();
-        time_t now_time_t = chrono::system_clock::to_time_t(now);
-        tm local_tm = *localtime(&now_time_t);
-        this->date_and_time=local_tm;
-
-        // Writing data in database.
-        writeInFile(fromUser);
-        writeInFile(ToUser);
-
-        generateTranscationId();
     }
     void generateTranscationId(){
         string transcation_id;
@@ -85,11 +76,14 @@ class Transcation{
     }
     void displayTranscation(){
         Transcation_Node* curr=head;
+        if(curr==NULL){
+            return;
+        }
         while(curr){
                 cout<<"Transcation Id: "<<curr->Transcation_Id<<endl;
                 cout<<"Money: "<<curr->money<<endl;
-                cout<<"From User: "<<curr->fromUser->name<<endl;
-                cout<<"To User: "<<curr->ToUser->name<<endl;
+                cout<<"From User: "<<curr->fromUser->Account_Number<<endl;
+                cout<<"To User: "<<curr->ToUser->Account_Number<<endl;
                 cout<<"Date: "<<put_time(&curr->date_and_time,"%d/%m/%Y")<<endl;
                 cout<<"Time: "<<put_time(&curr->date_and_time,"%H:%M:%S")<<endl;
                 cout<<endl;
@@ -116,8 +110,8 @@ void writeTranscationInFile(User* new_user){
             outputFile <<endl;
             outputFile <<"Transcation Id: "<<curr->Transcation_Id<<endl;
             outputFile <<"Money: "<<curr->money<<endl;
-            outputFile <<"From User: "<<curr->fromUser->name<<endl;
-            outputFile <<"To User: "<<curr->ToUser->name<<endl;
+            outputFile <<"From User: "<<curr->fromUser->Account_Number<<endl;
+            outputFile <<"To User: "<<curr->ToUser->Account_Number<<endl;
             outputFile <<"Date: "<<put_time(&curr->date_and_time,"%d/%m/%Y")<<endl;
             outputFile <<"Time: "<<put_time(&curr->date_and_time,"%H:%M:%S")<<endl;
             outputFile <<endl;
@@ -131,9 +125,24 @@ void writeTranscationInFile(User* new_user){
 }
 
 void do_Transcation(int money,User* from_user,User* to_user){
+    if(from_user->account_balance<money){
+        cout<<"Transcation can not happen Please deposit money into your account.";
+        return ;
+    }
+    from_user->account_balance = from_user->account_balance - money;
+    to_user->account_balance = to_user->account_balance + money;
+
     Transcation_Node* newTranscation =new Transcation_Node(money,from_user,to_user);
+    newTranscation->generateTranscationId();
+    cout<<newTranscation->Transcation_Id<<endl;
     from_user->transcation_history->insertTranscation(newTranscation);
     to_user->transcation_history->insertTranscation(newTranscation);
+
+    auto now = chrono::system_clock::now();
+    time_t now_time_t = chrono::system_clock::to_time_t(now);
+    tm local_tm = *localtime(&now_time_t);
+    newTranscation->date_and_time=local_tm;
+
     writeTranscationInFile(from_user);
     writeTranscationInFile(to_user);
 }
