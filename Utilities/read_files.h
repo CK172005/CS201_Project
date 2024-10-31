@@ -9,24 +9,18 @@
 using namespace std;
 
 
-long long convertIntoNumber(string num){
-    long long ans=0;
-    string temp;
-    for(int i=0;i<5;i++){
-        temp.push_back(num[i]);
+long long convertToLongLong(const string& str) {
+    try {
+        // Convert the string to long long
+        return stoll(str);
+    } catch (const invalid_argument&) {
+        cerr << "Invalid input: Not a valid number." << endl;
+        throw; // Rethrow the exception if you want to handle it later
+    } catch (const out_of_range&) {
+        cerr << "Invalid input: Number out of range for long long." << endl;
+        throw; // Rethrow the exception if you want to handle it later
     }
-    long long firstFive=((stoi)(temp));
-    firstFive=firstFive*1000000;
-    ans+=firstFive;
-    string temp2;
-    for(int i=5;i<11;i++){
-        temp2.push_back(num[i]);
-    }
-    long long lastSixDigit=(stoi)(temp2);
-    ans+=lastSixDigit;
-    return ans;
 }
-
 
 BTree* read_Data() {
    DIR *dr;
@@ -42,7 +36,7 @@ BTree* read_Data() {
         if((string)(en->d_name)!="." && (string)(en->d_name)!=".."){
             string fileName=en->d_name;
             fileName.erase(11,14);
-            long long number=convertIntoNumber(fileName);
+            long long number=convertToLongLong(fileName);
             root->insert(number);
         }
       }
