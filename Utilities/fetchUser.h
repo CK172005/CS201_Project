@@ -46,12 +46,15 @@ User* getUserDetails(string accountNumber){
                     if(key=="Transcation"){
                         break;
                     }
+                    value=decodeMessage(value,accountNumber);
+
                     keyValues[key]=value;
+
 
                 }
             }
             User* loginedUser=new User(keyValues["Name"],keyValues["DOB"],keyValues["Phone Number"],keyValues["Address"]);
-            loginedUser->account_balance=(stoi)(keyValues["Balance"]);
+            loginedUser->account_balance=convertToLongLong(keyValues["Balance"]);
             loginedUser->Account_Number=keyValues["Account Number"];
             loginedUser->password=keyValues["Password"];
 
@@ -125,12 +128,15 @@ void getUserTranscation(User* user){
                 key.erase(key.find_last_not_of(" \n\r\t") + 1);
                 value.erase(0, value.find_first_not_of(" \n\r\t"));
 
+                value=decodeMessage(value,user->Account_Number);
+
                 keyValues[key]=value;
+
 
                 if(key=="Time"){
                     User* fromUser=getUserDetails(keyValues["From User"]);
                     User* toUser=getUserDetails(keyValues["To User"]);
-                    int money=(stoi)(keyValues["Money"]);
+                    int money=convertToLongLong(keyValues["Money"]);
                     string date=keyValues["Date"];
                     string time=keyValues["Time"];
                     tm* dateAndTime=convertDateAndTime(date,time);
