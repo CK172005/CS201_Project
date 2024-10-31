@@ -71,7 +71,7 @@ class User{
                 char characterToPush=characters[rand()%characters.size()];
                 accountNumber.push_back(characterToPush);
             }
-            if(root->search(convertIntoNumber(accountNumber))==false){
+            if(root->search(convertToLongLong(accountNumber))==false){
                 this->Account_Number=accountNumber;
                 done=true;
             }
