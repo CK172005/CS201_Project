@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include "../models/User.h"
 #include "../Utilities/write_file.h"
+
 using namespace std;
 
 
@@ -45,6 +46,8 @@ bool checkUserExist(User* new_user){
                     // Trim whitespace (optional)
                     key.erase(key.find_last_not_of(" \n\r\t") + 1);
                     value.erase(0, value.find_first_not_of(" \n\r\t"));
+
+                    value=decodeMessage(value,new_user->Account_Number);
                     keyValues[key]=value;
                 }
             }
@@ -64,24 +67,25 @@ bool checkUserExist(User* new_user){
 void registerUser(){
     string name,dob,phoneNumber,address;
     cout<<"Enter the User Name: ";
-    cin>>name;
+    getline(cin,name);
 
     cout<<"Enter your Phone Number: ";
-    cin>>phoneNumber;
+    getline(cin,phoneNumber);
 
     cout<<"Enter your Date of Birth: ";
-    cin>>dob;
+    getline(cin,dob);
 
     cout<<"Enter your Address: ";
-    cin>>address;
+    getline(cin,address);
 
     User* new_user=new User(name,dob,phoneNumber,address);
+    new_user->generateAccountNumber();
 
     if(checkUserExist(new_user)){
         cout<<"User Exist"<<endl;
         return;
     }
-    new_user->generateAccountNumber();
+    cout<<"Your Account Number is: "<<new_user->Account_Number<<endl;
     new_user->setPassword();
     writeInFile(new_user);
     
