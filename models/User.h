@@ -120,7 +120,12 @@ class User{
 
     }
     void withdrawMoney(int moneyToWithDraw){
+        if(this->account_balance<moneyToWithDraw){
+            cout<<"You do not enough money to withdraw."<<endl;
+            return ;
+        }
         this->account_balance=this->account_balance-moneyToWithDraw;
+        cout<<"Money withdrawed from your account."<<endl;
     }
 };
 
