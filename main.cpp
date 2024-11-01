@@ -9,7 +9,7 @@ using namespace std;
 
 int main(){
 
-    
+    primeFiller(15000);
     // registerUser();
 
     // User* user1=getUser("17409488245");
