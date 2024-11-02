@@ -96,7 +96,7 @@ void registerUser(){
     cout<<"Your Account Number is: "<<new_user->Account_Number<<endl;
     new_user->setPassword();
     writeInFile(new_user);
-    cout<<"Your Account had been created Succesfully !";
+    cout<<"Your Account had been created Succesfully !\n";
     
 }
 
