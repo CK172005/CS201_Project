@@ -5,48 +5,160 @@
 #include "./Utilities/fetchUser.h"
 using namespace std;
 
-
-
 int main(){
-
     primeFiller(15000);
-    // registerUser();
+    cout<<"...........................................\n";
+    cout<<"     Welcome to Bank Management System     \n";
+    cout<<"...........................................\n";
 
-    // User* user1=getUser("17409488245");
-    // cout<<user1->name<<endl;
-    // cout<<user1->password<<endl;
-    // cout<<user1->Address<<endl;
-    // cout<<user1->Account_Number<<endl;
-    // user1->transcation_history->displayTranscation();
+    char in = 'L';
+    while(in != 'Q'){
+        char input;
+        cout<<"Press E for Employee"<<endl<<"Press U for User"<<endl<<"Press Q for Exit\n";
+        cin>>input;
+        if (input == 'U'){
+                cout<<"-------------------------------------------\n";
+                cout<<"|          Welcome User Portal              |\n";
+                cout<<"--------------------------------------------\n";
 
+                char choice;
+                cout<<"Press C to create Account"<<endl;
+                cout<<"Press L to login your Account\n";
+                cin>>choice;
 
-    // User* user1=loginUser();
-    // cout<<user1->name<<endl;
-    // cout<<user1->password<<endl;
-    // cout<<user1->Address<<endl;
-    // cout<<user1->Account_Number<<endl;
-    // cout<<user1->phone_Number<<endl;
-    // cout<<user1->dob<<endl;
-    // cout<<user1->age<<endl;
-    // user1->transcation_history->displayTranscation();
+                if (choice == 'L'){
 
+                    User* user1=loginUser();
+                    getUserTranscation(user1);
+                    if (user1 == NULL){
+                        break;
+                    }
+                    char pi = 'P';
+                    while (pi != 'B'){
 
-    // User* user1=getUser("17409488245");
-    // User* user2=getUser("23221685761");
-    // user1->depositMoney(10000);
+                        cout<<"\nPress I to show User Details"<<endl;
+                        cout<<"Press C to check Balance"<<endl;
+                        cout<<"Press D to deposit Cash"<<endl;
+                        cout<<"Press W to Withdraw Cash"<<endl;
+                        cout<<"Press T for Transections"<<endl;
+                        cout<<"Press H to show Transection History\n";
+                        cout<<"Press B for Back\n";
 
+                        char process;
+                        cin>>process;
+                        if (process == 'I'){
 
+                            cout<<"Account holder Name : "<<user1->name<<endl;
+                            cout<<"Account Number      : "<<user1->Account_Number<<endl;
+                            cout<<"Address             : "<<user1->Address<<endl;
+                            cout<<"phone number        : "<<user1->phone_Number<<endl;
+                            cout<<"DOB(dd/mm/yyyy)     : "<<user1->dob<<endl;
+                            cout<<"Age                 : "<<user1->age<<endl;
+                            cout<<"Current Balance     : "<<user1->account_balance<<"\n";
+                        }
 
-    // do_Transcation(3000,user1,user2);
-    // do_Transcation(1000,user2,user1);
+                        else if (process == 'C'){
 
+                            cout<<"Account holder Name : "<<user1->name<<endl;
+                            cout<<"Account Number      : "<<user1->Account_Number<<endl;
+                            cout<<"Current Balance     : "<<user1->account_balance<<"\n";
+                        }
 
-    // cout<<"User 1 Transcation History: "<<endl;
-    // user1->transcation_history->displayTranscation();
-    // cout<<endl<<endl;
+                        else if (process == 'D'){
+                            int deposit_money;
+                            cout<<"Enter the Ammount you want to deposit:\n";
+                            cin>>deposit_money;
+                            do_Transcation(deposit_money,user1,user1);
+                            user1->depositMoney(deposit_money);
+                            writeTranscationInFile(user1);
 
-    // cout<<"User 2 Transcation History: "<<endl;
-    // user2->transcation_history->displayTranscation();
-    
+                            cout<<"Rs. "<<deposit_money<<" deposited to your Current Account.";
+                            cout<<"\nCurrent Balance: "<<user1->account_balance<<"\n";
+
+                        }
+
+                        else if (process == 'W'){
+                            int withdraw_money;
+                            cout<<"Enter the Ammount you want to withdraw:\n";
+                            cin>>withdraw_money;
+                            do_Transcation(withdraw_money,user1,user1);
+                            user1->withdrawMoney(withdraw_money);
+                            writeTranscationInFile(user1);
+                            cout<<"\nCurrent Balance: "<<user1->account_balance<<"\n";
+
+                        }
+
+                        else if (process == 'T'){
+                            string reciver_acc_no;
+                            User* user2;
+                            for (int i = 1;i<= 3;i++){
+                                cout<<"Enter the Recivers Account No.: \n";
+                                cin>>reciver_acc_no;
+                                user2 = getUser(reciver_acc_no);
+                                if (user2 != NULL){
+                                    break;  
+                                }
+                            }
+                            if (user2 == NULL){
+                                break;
+                            }
+                            else{
+                                int transection_ammount;
+                                cout<<"Enter the ammount you want to send to recivers account:";
+                                cin>>transection_ammount;
+                                string password;
+                                for (int i = 1; i<= 3; i++){
+                                    cout<<"Enter the Password";
+                                    password = getHiddenInput();
+                                    if (password == user1->password){
+                                        char ch;
+                                        cout<<"Are you sure you want to proceed the transection,if yes press 'Y' ,else 'N': ";
+                                        cin>>ch;
+                                        if (ch == 'Y'){
+                                            do_Transcation(transection_ammount,user1,user2);
+                                            cout<<"Current Balance: "<<user1->account_balance<<"\n";
+                                            cout<<"Transcation Id: "<<user1->transcation_history->tail->Transcation_Id<<endl;
+                                            cout<<"Money: "<<user1->transcation_history->tail->money<<endl;
+                                            cout<<"From User: "<<user1->transcation_history->tail->fromUser->Account_Number<<endl;
+                                            cout<<"To User: "<<user1->transcation_history->tail->ToUser->Account_Number<<endl;
+                                            cout<<"Date: "<<put_time(&user1->transcation_history->tail->date_and_time,"%d/%m/%Y")<<endl;
+                                            cout<<"Time: "<<put_time(&user1->transcation_history->tail->date_and_time,"%H:%M:%S")<<endl;
+                                            cout<<endl;
+                                            break;
+                                        }
+                                        else if (ch == 'N'){
+                                            cout<<"Transection not proceed\n";
+                                            break;
+                                        }
+                                    }
+                                    else {
+                                        cout<<"Incorrect password";
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
+                        else if (process == 'H'){
+                            cout<<"Your Transcation History: "<<endl;
+                            user1->transcation_history->displayTranscation();
+                        }
+
+                        else if (process == 'B'){
+                            pi = 'B';
+                        }
+
+                    }
+                }
+                else if (choice == 'C'){
+                    registerUser();
+                }
+        }
+        else if(input =='Q'){
+            in ='Q';
+        }
+        cout<<"\n";
+    }
 }
+
 
