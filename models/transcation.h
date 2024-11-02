@@ -112,6 +112,7 @@ void writeTranscationInFile(User* new_user){
         outputFile << "Address: " << encodeMessage(new_user->Address,new_user->Account_Number) << "\n";
         outputFile << "Account Number: " << encodeMessage(new_user->Account_Number,new_user->Account_Number) << "\n";
         outputFile << "Age: "<<encodeMessage((to_string)(new_user->age),new_user->Account_Number)<<endl;
+        outputFile << "Password: "<<encodeMessage(new_user->password,new_user->Account_Number)<<endl;
         outputFile << "Balance: "<<encodeMessage((to_string)(new_user->account_balance),new_user->Account_Number)<<endl;
         outputFile << "Transcation: ";
         Transcation_Node* curr=new_user->transcation_history->head;
