@@ -96,15 +96,23 @@ int main(){
                         else if (process == 'T'){
                             string reciver_acc_no;
                             User* user2;
-                            for (int i = 1;i<= 3;i++){
+                            char delta = 'd';
+                            while(delta != 'x'){
                                 cout<<"Enter the Recivers Account No.: \n";
                                 cin>>reciver_acc_no;
-                                user2 = getUser(reciver_acc_no);
-                                if (user2 != NULL){
-                                    break;  
+                                if (convertToLongLong(reciver_acc_no) && reciver_acc_no.size() == 11 ){
+                                    user2 = getUser(reciver_acc_no);
+                                    if (user2 != NULL){
+                                        delta = 'x';
+                                        break;
+                                    }
                                 }
-                            }
+                                else{
+                                    cout<<"Invalid Account number\n";
+                                }
+                            }                       
                             if (user2 == NULL){
+                                cout<<"hello";
                                 break;
                             }
                             else{
