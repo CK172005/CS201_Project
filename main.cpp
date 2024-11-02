@@ -81,10 +81,15 @@ int main(){
                             int withdraw_money;
                             cout<<"Enter the Ammount you want to withdraw:\n";
                             cin>>withdraw_money;
-                            do_Transcation(withdraw_money,user1,user1);
-                            user1->withdrawMoney(withdraw_money);
-                            writeTranscationInFile(user1);
-                            cout<<"\nCurrent Balance: "<<user1->account_balance<<"\n";
+                            if(user1->account_balance<withdraw_money){
+                                    cout<<"Withdraw can not happen ,Please deposit money into your account.\n";
+                            }
+                            else{
+                                do_Transcation(withdraw_money,user1,user1);
+                                user1->withdrawMoney(withdraw_money);
+                                writeTranscationInFile(user1);
+                                cout<<"\nCurrent Balance: "<<user1->account_balance<<"\n";
+                            }
 
                         }
 
@@ -106,34 +111,39 @@ int main(){
                                 int transection_ammount;
                                 cout<<"Enter the ammount you want to send to recivers account:";
                                 cin>>transection_ammount;
-                                string password;
-                                for (int i = 1; i<= 3; i++){
-                                    cout<<"Enter the Password";
-                                    password = getHiddenInput();
-                                    if (password == user1->password){
-                                        char ch;
-                                        cout<<"Are you sure you want to proceed the transection,if yes press 'Y' ,else 'N': ";
-                                        cin>>ch;
-                                        if (ch == 'Y'){
-                                            do_Transcation(transection_ammount,user1,user2);
-                                            cout<<"Current Balance: "<<user1->account_balance<<"\n";
-                                            cout<<"Transcation Id: "<<user1->transcation_history->tail->Transcation_Id<<endl;
-                                            cout<<"Money: "<<user1->transcation_history->tail->money<<endl;
-                                            cout<<"From User: "<<user1->transcation_history->tail->fromUser->Account_Number<<endl;
-                                            cout<<"To User: "<<user1->transcation_history->tail->ToUser->Account_Number<<endl;
-                                            cout<<"Date: "<<put_time(&user1->transcation_history->tail->date_and_time,"%d/%m/%Y")<<endl;
-                                            cout<<"Time: "<<put_time(&user1->transcation_history->tail->date_and_time,"%H:%M:%S")<<endl;
-                                            cout<<endl;
-                                            break;
+                                if (user1->account_balance<transection_ammount){
+                                    cout<<"Transection can not happen ,Please deposit money into your account.\n";
+                                }
+                                else{
+                                    string password;
+                                    for (int i = 1; i<= 3; i++){
+                                        cout<<"Enter the Password";
+                                        password = getHiddenInput();
+                                        if (password == user1->password){
+                                            char ch;
+                                            cout<<"Are you sure you want to proceed the transection,if yes press 'Y' ,else 'N': ";
+                                            cin>>ch;
+                                            if (ch == 'Y'){
+                                                do_Transcation(transection_ammount,user1,user2);
+                                                cout<<"Current Balance: "<<user1->account_balance<<"\n";
+                                                cout<<"Transcation Id: "<<user1->transcation_history->tail->Transcation_Id<<endl;
+                                                cout<<"Money: "<<user1->transcation_history->tail->money<<endl;
+                                                cout<<"From User: "<<user1->transcation_history->tail->fromUser->Account_Number<<endl;
+                                                cout<<"To User: "<<user1->transcation_history->tail->ToUser->Account_Number<<endl;
+                                                cout<<"Date: "<<put_time(&user1->transcation_history->tail->date_and_time,"%d/%m/%Y")<<endl;
+                                                cout<<"Time: "<<put_time(&user1->transcation_history->tail->date_and_time,"%H:%M:%S")<<endl;
+                                                cout<<endl;
+                                                break;
+                                            }
+                                            else if (ch == 'N'){
+                                                cout<<"Transection not proceed\n";
+                                                break;
+                                            }
                                         }
-                                        else if (ch == 'N'){
-                                            cout<<"Transection not proceed\n";
-                                            break;
+                                        else {
+                                            cout<<"Incorrect password";
+                                            continue;
                                         }
-                                    }
-                                    else {
-                                        cout<<"Incorrect password";
-                                        continue;
                                     }
                                 }
                             }
