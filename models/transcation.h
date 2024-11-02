@@ -135,10 +135,6 @@ void writeTranscationInFile(User* new_user){
 }
 
 void do_Transcation(int money,User* from_user,User* to_user){
-    if(from_user->account_balance<money){
-        cout<<"Transcation can not happen Please deposit money into your account.";
-        return ;
-    }
     from_user->account_balance = from_user->account_balance - money;
     to_user->account_balance = to_user->account_balance + money;
 
