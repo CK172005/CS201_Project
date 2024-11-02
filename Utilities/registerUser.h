@@ -67,16 +67,24 @@ bool checkUserExist(User* new_user){
 void registerUser(){
     string name,dob,phoneNumber,address;
     cout<<"Enter the User Name: ";
-    getline(cin,name);
+    cin>>name;
 
-    cout<<"Enter your Phone Number: ";
-    getline(cin,phoneNumber);
+    for(int i = 1; i <= 3 ;i++){
+        cout<<"Enter your Phone Number: ";
+        cin>>phoneNumber;
+        if (convertToLongLong(phoneNumber) && phoneNumber.size() == 10 ){
+            break;
+        }
+        else{
+            cout<<"Invalid Phone number\n";
+        }
+    }
 
-    cout<<"Enter your Date of Birth: ";
-    getline(cin,dob);
+    cout<<"Enter your Date of Birth (dd/mm/yyyy): ";
+    cin>>dob;
 
     cout<<"Enter your Address: ";
-    getline(cin,address);
+    cin>>address;
 
     User* new_user=new User(name,dob,phoneNumber,address);
     new_user->generateAccountNumber();
@@ -88,6 +96,7 @@ void registerUser(){
     cout<<"Your Account Number is: "<<new_user->Account_Number<<endl;
     new_user->setPassword();
     writeInFile(new_user);
+    cout<<"Your Account had been created Succesfully !";
     
 }
 
