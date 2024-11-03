@@ -104,6 +104,10 @@ int main(){
                                 if(reciver_acc_no=="B" || reciver_acc_no=="b"){
                                     delta = 'x';
                                 }
+                                else if(reciver_acc_no==user1->Account_Number){
+                                    cout<<"Please Enter different Account Number"<<endl;
+                                    continue;
+                                }
                                 else if (reciver_acc_no.size() == 11 && convertToLongLong(reciver_acc_no)){
                                     user2 = getUser(reciver_acc_no);
                                     if (user2 != NULL){
