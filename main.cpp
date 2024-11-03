@@ -178,6 +178,7 @@ int main(){
             if(logined==true){
                 char choice='A';
                 while(choice!='Q'){
+                    cout<<endl<<endl;
                     cout<<"Please Enter D to show all the account present"<<endl;
                     cout<<"Please Enter M to show all the minor accounts"<<endl;
                     cout<<"Please Enter S to search the user"<<endl;
@@ -186,13 +187,13 @@ int main(){
                     if(choice=='Q'){
                         break;
                     }
-                    else if(choice =='D'){
+                    else if(choice =='D' || choice =='d'){
                         displayAccounts();
                     }
-                    else if(choice == 'M'){
+                    else if(choice == 'M' || choice =='m'){
                         displayMinor();
                     }
-                    else if(choice =='S'){
+                    else if(choice =='S' || choice == 's'){
                         string accountNumber;
                         cout<<"Enter the account Number you want to search: ";
                         cin>>accountNumber;
@@ -203,6 +204,7 @@ int main(){
                         else{
                             char c='T';
                             while(c!='Q'){
+                                cout<<endl<<endl;
                                 cout<<"Please Enter I to see all information of user"<<endl;
                                 cout<<"Please enter C to check Balance: "<<endl;
                                 cout<<"Please enter D to delete User: "<<endl;
