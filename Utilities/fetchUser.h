@@ -20,7 +20,7 @@ User* getUserDetails(string accountNumber){
             ifstream inputFile(fileName);
             // Check if the file was opened successfully
             if (!inputFile) {
-                cerr << "Details Please Enter the Valid Account Number" <<accountNumber<< endl;
+                cerr << "Please Enter the Valid Account Number" <<accountNumber<< endl;
                 return NULL; // Exit with an error code
             }
 
