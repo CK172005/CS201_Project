@@ -31,7 +31,7 @@ int main(){
                     User* user1=loginUser();
                     getUserTranscation(user1);
                     if (user1 == NULL){
-                        break;
+                        continue;
                     }
                     char pi = 'P';
                     while (pi != 'B'){
@@ -95,27 +95,27 @@ int main(){
 
                         else if (process == 'T'){
                             string reciver_acc_no;
-                            User* user2;
+                            User* user2=NULL;
                             char delta = 'd';
                             while(delta != 'x'){
                                 cout<<"Enter the Recivers Account No.: \n";
                                 cin>>reciver_acc_no;
-                                if (convertToLongLong(reciver_acc_no) && reciver_acc_no.size() == 11 ){
+                                if(reciver_acc_no=="B" || reciver_acc_no=="b"){
+                                    delta = 'x';
+                                }
+                                else if (reciver_acc_no.size() == 11 && convertToLongLong(reciver_acc_no)){
                                     user2 = getUser(reciver_acc_no);
                                     if (user2 != NULL){
                                         delta = 'x';
                                         break;
                                     }
+                                   
                                 }
                                 else{
                                     cout<<"Invalid Account number\n";
                                 }
                             }                       
-                            if (user2 == NULL){
-                                cout<<"hello";
-                                break;
-                            }
-                            else{
+                            if(user2!=NULL){
                                 int transection_ammount;
                                 cout<<"Enter the ammount you want to send to recivers account:";
                                 cin>>transection_ammount;
