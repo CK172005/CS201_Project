@@ -202,12 +202,12 @@ int main(){
                         }
                         else{
                             char c='T';
-                            cout<<"Please Enter I to see all information of user"<<endl;
-                            cout<<"Please enter C to check Balance: "<<endl;
-                            cout<<"Please enter D to delete User: "<<endl;
-                            cout<<"Please enter H to see transcation history: "<<endl;
-                            cout<<"Please enter Q to quit: "<<endl;
                             while(c!='Q'){
+                                cout<<"Please Enter I to see all information of user"<<endl;
+                                cout<<"Please enter C to check Balance: "<<endl;
+                                cout<<"Please enter D to delete User: "<<endl;
+                                cout<<"Please enter H to see transcation history: "<<endl;
+                                cout<<"Please enter Q to quit: "<<endl;
                                 cin>>c;
                                 if(c=='C' || c=='c'){
                                     cout<<"User has Account Balance: "<<user->account_balance<<endl;
