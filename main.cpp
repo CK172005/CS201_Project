@@ -229,6 +229,7 @@ int main(){
                                     } else {
                                         cerr << "Error while deleting user.." << endl;
                                     }
+                                    break;
                                 }
                                 else if(c=="H" || c=="h"){
                                     user->transcation_history->displayTranscation();
