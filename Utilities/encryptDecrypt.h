@@ -94,7 +94,6 @@ long long decrypt(int encrypted, int private_key, int n) {
 
 
 string encodeMessage(const string &message, string accountNumber) {
-    primeFiller(100000);
     pair<int,pair<int,int>> keys = getKeys(accountNumber);
     int n=keys.first, pbk=keys.second.first;
     string cipherText="";
@@ -110,7 +109,6 @@ string encodeMessage(const string &message, string accountNumber) {
 }
 
 string decodeMessage(const string &cipherText, string accountNumber) {
-    primeFiller(100000);
     pair<int,pair<int,int>> keys = getKeys(accountNumber);
     int n=keys.first, pvk=keys.second.second;
     string plainText;
