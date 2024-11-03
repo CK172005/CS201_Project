@@ -3,6 +3,7 @@
 #include "./Utilities/loginUser.h"
 #include "./models/Transcation.h"
 #include "./Utilities/fetchUser.h"
+#include "./models/employee.h"
 using namespace std;
 
 int main(){
