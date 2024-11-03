@@ -8,8 +8,8 @@ using namespace std;
 
 int main(){
     primeFiller(15000);
-    cout<<"...........................................\n";
-    cout<<"     Welcome to Bank Management System     \n";
+    cout<<"..............................................\n";
+    cout<<"|     Welcome to Bank Management System     |\n";
     cout<<"...........................................\n";
 
     string in = "L";
@@ -36,17 +36,18 @@ int main(){
                     }
                     string pi = "P";
                     while (pi != "B"){
-
-                        cout<<"\nPress I to show User Details"<<endl;
+                        cout<<"------------------------------------------"<<endl;
+                        cout<<"Press I to show User Details"<<endl;
                         cout<<"Press C to check Balance"<<endl;
                         cout<<"Press D to deposit Cash"<<endl;
                         cout<<"Press W to Withdraw Cash"<<endl;
                         cout<<"Press T for Transections"<<endl;
                         cout<<"Press H to show Transection History\n";
-                        cout<<"Press B for Back\n";
+                        cout<<"Press B for Back"<<endl;
 
                         string process;
                         getline(cin,process);
+                        cout<<"-------------------------------------------"<<endl;
                         if (process == "I" || process == "i"){
 
                             cout<<"Account holder Name : "<<user1->name<<endl;
@@ -67,7 +68,7 @@ int main(){
 
                         else if (process == "D" || process == "d" ){
                             string money;
-                            cout<<"Enter the Ammount you want to deposit:\n";
+                            cout<<"Enter the Amount you want to deposit:\n";
                             getline(cin,money);
                             int deposit_money=stoi(money);
                             do_Transcation(deposit_money,user1,user1);
@@ -81,7 +82,7 @@ int main(){
 
                         else if (process == "W" || process == "w"){
                             string money;
-                            cout<<"Enter the Ammount you want to withdraw:\n";
+                            cout<<"Enter the Amount you want to withdraw:\n";
                             getline(cin,money);
                             int withdraw_money=stoi(money);
                             if(user1->account_balance<withdraw_money){
@@ -107,7 +108,7 @@ int main(){
                                     delta = "x";
                                 }
                                 else if(reciver_acc_no==user1->Account_Number){
-                                    cout<<"Please Enter different Account Number"<<endl;
+                                    cout<<"Please Enter different Account Number."<<endl;
                                     continue;
                                 }
                                 else if (reciver_acc_no.size() == 11 && convertToLongLong(reciver_acc_no)){
@@ -124,16 +125,16 @@ int main(){
                             }                       
                             if(user2!=NULL){
                                 string amount;
-                                cout<<"Enter the ammount you want to send to recivers account:";
+                                cout<<"Enter the amount you want to send to recivers account:";
                                 getline(cin,amount);
                                 int transection_ammount=stoi(amount);
                                 if (user1->account_balance<transection_ammount){
-                                    cout<<"Transection can not happen ,Please deposit money into your account.\n";
+                                    cout<<"Transaction can not happen ,Please deposit money into your account.\n";
                                 }
                                 else{
                                     string password;
                                     for (int i = 1; i<= 3; i++){
-                                        cout<<"Enter the Password";
+                                        cout<<"Enter the Password: ";
                                         password = getHiddenInput();
                                         if (password == user1->password){
                                             string ch;
@@ -185,12 +186,13 @@ int main(){
             if(logined==true){
                 string choice="A";
                 while(choice!="Q"){
-                    cout<<endl<<endl;
+                    cout<<"------------------------------------------"<<endl;
                     cout<<"Please Enter D to show all the account present"<<endl;
                     cout<<"Please Enter M to show all the minor accounts"<<endl;
                     cout<<"Please Enter S to search the user"<<endl;
                     cout<<"Please Enter Q to Quit."<<endl;
                     getline(cin,choice);
+                    cout<<"------------------------------------------"<<endl;
                     if(choice=="Q"){
                         break;
                     }
@@ -212,12 +214,14 @@ int main(){
                             string c="T";
                             while(c!="Q"){
                                 cout<<endl<<endl;
+                                cout<<"----------------------------------------------------"<<endl;
                                 cout<<"Please Enter I to see all information of user"<<endl;
                                 cout<<"Please enter C to check Balance: "<<endl;
                                 cout<<"Please enter D to delete User: "<<endl;
                                 cout<<"Please enter H to see transcation history: "<<endl;
                                 cout<<"Please enter Q to quit: "<<endl;
                                 getline(cin,c);
+                                cout<<"----------------------------------------------------"<<endl;
                                 if(c=="C" || c=="c"){
                                     cout<<"User has Account Balance: "<<user->account_balance<<endl;
                                 }
