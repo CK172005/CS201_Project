@@ -12,11 +12,11 @@ int main(){
     cout<<"...........................................\n";
 
     char in = 'L';
-    while(in != 'Q'){
+    while(in != 'Q' ){
         char input;
         cout<<"Press E for Employee"<<endl<<"Press U for User"<<endl<<"Press Q for Exit\n";
         cin>>input;
-        if (input == 'U'){
+        if (input == 'U' || input == 'u'){
                 cout<<"-------------------------------------------\n";
                 cout<<"|          Welcome User Portal              |\n";
                 cout<<"--------------------------------------------\n";
@@ -26,7 +26,7 @@ int main(){
                 cout<<"Press L to login your Account\n";
                 cin>>choice;
 
-                if (choice == 'L'){
+                if (choice == 'L' || choice == 'l'){
 
                     User* user1=loginUser();
                     getUserTranscation(user1);
@@ -46,7 +46,7 @@ int main(){
 
                         char process;
                         cin>>process;
-                        if (process == 'I'){
+                        if (process == 'I' || process == 'i'){
 
                             cout<<"Account holder Name : "<<user1->name<<endl;
                             cout<<"Account Number      : "<<user1->Account_Number<<endl;
@@ -57,14 +57,14 @@ int main(){
                             cout<<"Current Balance     : "<<user1->account_balance<<"\n";
                         }
 
-                        else if (process == 'C'){
+                        else if (process == 'C' || process == 'c'){
 
                             cout<<"Account holder Name : "<<user1->name<<endl;
                             cout<<"Account Number      : "<<user1->Account_Number<<endl;
                             cout<<"Current Balance     : "<<user1->account_balance<<"\n";
                         }
 
-                        else if (process == 'D'){
+                        else if (process == 'D' || process == 'd' ){
                             int deposit_money;
                             cout<<"Enter the Ammount you want to deposit:\n";
                             cin>>deposit_money;
@@ -77,7 +77,7 @@ int main(){
 
                         }
 
-                        else if (process == 'W'){
+                        else if (process == 'W' || process == 'w'){
                             int withdraw_money;
                             cout<<"Enter the Ammount you want to withdraw:\n";
                             cin>>withdraw_money;
@@ -93,7 +93,7 @@ int main(){
 
                         }
 
-                        else if (process == 'T'){
+                        else if (process == 'T' || process == 't'){
                             string reciver_acc_no;
                             User* user2=NULL;
                             char delta = 'd';
@@ -131,7 +131,7 @@ int main(){
                                             char ch;
                                             cout<<"Are you sure you want to proceed the transection,if yes press 'Y' ,else 'N': ";
                                             cin>>ch;
-                                            if (ch == 'Y'){
+                                            if (ch == 'Y' || ch == 'y'){
                                                 do_Transcation(transection_ammount,user1,user2);
                                                 cout<<"Current Balance: "<<user1->account_balance<<"\n";
                                                 cout<<"Transcation Id: "<<user1->transcation_history->tail->Transcation_Id<<endl;
@@ -143,7 +143,7 @@ int main(){
                                                 cout<<endl;
                                                 break;
                                             }
-                                            else if (ch == 'N'){
+                                            else if (ch == 'N' || ch == 'n'){
                                                 cout<<"Transection not proceed\n";
                                                 break;
                                             }
@@ -157,22 +157,22 @@ int main(){
                             }
                         }
 
-                        else if (process == 'H'){
+                        else if (process == 'H' || process == 'h'){
                             cout<<"Your Transcation History: "<<endl;
                             user1->transcation_history->displayTranscation();
                         }
 
-                        else if (process == 'B'){
+                        else if (process == 'B' || process == 'b'){
                             pi = 'B';
                         }
 
                     }
                 }
-                else if (choice == 'C'){
+                else if (choice == 'C' || choice == 'c'){
                     registerUser();
                 }
         }
-        else if(input =='Q'){
+        else if(input =='Q' || input == 'q'){
             in ='Q';
         }
         cout<<"\n";
