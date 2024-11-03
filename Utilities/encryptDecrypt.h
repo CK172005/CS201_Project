@@ -57,6 +57,9 @@ pair<int,int> getPrimes(string accountNumber) {
     int x=convertToLongLong(a), y=convertToLongLong(b);
     x=getNextPrime(x);
     y=getNextPrime(y);
+    if(x==y){
+        y=getNextPrime(y);
+    }
     return {x,y};
 }
 
