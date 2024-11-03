@@ -88,7 +88,7 @@ class User{
         cout<<"Are you sure you want to add this password?"<<endl;
         cout<<"Enter Y for yes and N for no."<<endl;
         string confirmation;
-        cin>>confirmation;
+        getline(cin,confirmation);
         if(confirmation=="Y" || confirmation=="y"){
             this->password=password;
         }
@@ -101,7 +101,7 @@ class User{
         cout<<"Are you sure you want to change the Phone Number?"<<endl;
         cout<<"Enter Y for yes and N for no."<<endl;
         string confirmation;
-        cin>>confirmation;
+        getline(cin,confirmation);
         if(confirmation=="Y" || confirmation=="y"){
             this->phone_Number=newNumber;
         }
@@ -110,7 +110,7 @@ class User{
         cout<<"Are you sure you want to change the password?"<<endl;
         cout<<"Enter Y for yes and N for no."<<endl;
         string confirmation;
-        cin>>confirmation;
+        getline(cin,confirmation);
         if(confirmation=="Y" || confirmation=="y"){
             this->password=newPassword;
         }
