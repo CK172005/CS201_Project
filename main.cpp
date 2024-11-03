@@ -172,6 +172,75 @@ int main(){
                     registerUser();
                 }
         }
+        else if(input =='E'){
+            bool logined=loginEmployee();
+            if(logined==true){
+                char choice='A';
+                while(choice!='Q'){
+                    cout<<"Please Enter D to show all the account present"<<endl;
+                    cout<<"Please Enter M to show all the minor accounts"<<endl;
+                    cout<<"Please Enter S to search the user"<<endl;
+                    cout<<"Please Enter Q to Quit."<<endl;
+                    cin>>choice;
+                    if(choice=='Q'){
+                        break;
+                    }
+                    else if(choice =='D'){
+                        displayAccounts();
+                    }
+                    else if(choice == 'M'){
+                        displayMinor();
+                    }
+                    else if(choice =='S'){
+                        string accountNumber;
+                        cout<<"Enter the account Number you want to search: ";
+                        cin>>accountNumber;
+                        User* user=getUser(accountNumber);
+                        if(user==NULL){
+                            cout<<"User does not Exist."<<endl;
+                        }
+                        else{
+                            char c='T';
+                            cout<<"Please Enter I to see all information of user"<<endl;
+                            cout<<"Please enter C to check Balance: "<<endl;
+                            cout<<"Please enter D to delete User: "<<endl;
+                            cout<<"Please enter H to see transcation history: "<<endl;
+                            cout<<"Please enter Q to quit: "<<endl;
+                            while(c!='Q'){
+                                cin>>c;
+                                if(c=='C' || c=='c'){
+                                    cout<<"User has Account Balance: "<<user->account_balance<<endl;
+                                }
+                                else if(c=='D' || c=='d'){
+                                    string fileName="database/"+user->Account_Number+".txt";
+                                    if (remove(fileName.c_str()) == 0) {
+                                        cout << "user deleted successfully." << endl;
+                                        break;
+                                    } else {
+                                        cerr << "Error while deleting user.." << endl;
+                                    }
+                                }
+                                else if(c=='H' || c=='h'){
+                                    user->transcation_history->displayTranscation();
+                                }
+                                else if(c=='I' || c=='i'){
+                                    cout<<"Account holder Name : "<<user->name<<endl;
+                                    cout<<"Account Number      : "<<user->Account_Number<<endl;
+                                    cout<<"Address             : "<<user->Address<<endl;
+                                    cout<<"phone number        : "<<user->phone_Number<<endl;
+                                    cout<<"DOB(dd/mm/yyyy)     : "<<user->dob<<endl;
+                                    cout<<"Age                 : "<<user->age<<endl;
+                                    cout<<"Current Balance     : "<<user->account_balance<<"\n";
+                                    
+                                }
+
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
         else if(input =='Q' || input == 'q'){
             in ='Q';
         }
